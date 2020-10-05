@@ -1,8 +1,9 @@
 package com.bridgelabz;
 import java.util.*;
+import java.util.stream.Collectors;
 public class AddressBookPerson {
 	private String bookName;
-	//arraylist to store contacts
+	//array list to store contacts
 	private ArrayList<ContactDetails> bookList;
 	private Map<String,String> CityPerson;
 	private Map<String,String> StatePerson;
@@ -38,8 +39,10 @@ public class AddressBookPerson {
 		if (check)no--;
 		else;
 		}
+		this.sortContactNames();
+
 }
-	// function to add new contacts to the addressbook
+	// function to add new contacts to the address book
 		public boolean addNewContact(String firstName, String lastName,String address, String city, String state, int phoneNumber,
 				int zip,
 				String emailId) {
@@ -56,6 +59,16 @@ public class AddressBookPerson {
 			this.StatePerson.put(contactX.getState(), contactX.getFirstName());
 			return true;
 		}
+		
+		private void sortContactNames() {
+			List<ContactDetails> sortedList = this.bookList.stream().sorted((n1,n2)->n1.getFirstName().compareTo(n2.getFirstName())).collect(Collectors.toList());
+			//System.out.println("Sorted contact list is : "+sortedList);
+			sortedList.stream().forEach(n->{
+				System.out.println("Contact name is : "+n.getFirstName());
+			});
+		}
+		
+		
 		//change details of given person
 		public void changeDetails() {
 			System.out.println("Enter the First Name of person whose details are to be changed :");
