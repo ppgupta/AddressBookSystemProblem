@@ -81,9 +81,26 @@ public class AddressBookPerson {
 			System.out.println("No record found for this person");
 
 		}
+		// search person by name
+
+		public void search(String firstName) {
+			boolean found =  false;
+			for(int i = 0; i<this.bookList.size();i++) {
+				if(this.bookList.get(i).getFirstName().equalsIgnoreCase(firstName)) {
+					System.out.println(firstName+" lives in city :"+this.bookList.get(i).getCity()+" and state :"+this.bookList.get(i).getState());
+					found = true;
+				}
+			}
+			if(!found) {
+				System.out.println("No record found for "+firstName+" in "+this.bookName+" address book");
+			}
+			
+		}
 		// display welcome message
 		public void displayMessage() {
 			System.out.println("Welcome to Address Book");
 		}
+		
+		
 		
 }
