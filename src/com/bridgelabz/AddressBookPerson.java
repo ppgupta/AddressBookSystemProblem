@@ -40,7 +40,8 @@ public class AddressBookPerson {
 		else;
 		}
 		this.sortContactNames();
-
+		this.sortByCity();
+		this.sortByState();
 }
 	// function to add new contacts to the address book
 		public boolean addNewContact(String firstName, String lastName,String address, String city, String state, int phoneNumber,
@@ -61,13 +62,18 @@ public class AddressBookPerson {
 		}
 		
 		private void sortContactNames() {
-			List<ContactDetails> sortedList = this.bookList.stream().sorted((n1,n2)->n1.getFirstName().compareTo(n2.getFirstName())).collect(Collectors.toList());
-			//System.out.println("Sorted contact list is : "+sortedList);
-			sortedList.stream().forEach(n->{
+			List<ContactDetails> sortedNameList = this.bookList.stream().sorted((n1,n2)->n1.getFirstName().compareTo(n2.getFirstName())).collect(Collectors.toList());
+			sortedNameList.stream().forEach(n->{
 				System.out.println("Contact name is : "+n.getFirstName());
 			});
 		}
+		private void sortByCity() {
+			List<ContactDetails> sortedCityList = this.bookList.stream().sorted((n1,n2)->n1.getCity().compareTo(n2.getCity())).collect(Collectors.toList());
+		}
 		
+		private void sortByState() {
+			List<ContactDetails> sortedStateList = this.bookList.stream().sorted((n1,n2)->n1.getState().compareTo(n2.getState())).collect(Collectors.toList());
+		}
 		
 		//change details of given person
 		public void changeDetails() {
