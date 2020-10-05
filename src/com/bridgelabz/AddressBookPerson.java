@@ -34,14 +34,21 @@ public class AddressBookPerson {
 		}
 }
 	// function to add new contacts to the addressbook
-		public void addNewContact(String firstName, String lastName,String address, String city, String state, int phoneNumber,
+		public boolean addNewContact(String firstName, String lastName,String address, String city, String state, int phoneNumber,
 				int zip,
 				String emailId) {
 			ContactDetails contactX = new ContactDetails(firstName, lastName,address, city, state,zip, phoneNumber, emailId);
+			for(int i = 0 ; i<bookList.size();i++) {
+				if(this.bookList.get(i).getFirstName().equalsIgnoreCase(firstName)) {
+					System.out.println("Contact with this name already exists");
+					return false;
+				}
+			}
 			this.bookList.add(contactX);
-			// bookMap.put(first, value)
+			System.out.println("Contact added successfully:");
+			return true;
 		}
-		//changedetails of given person
+		//change details of given person
 		public void changeDetails() {
 			System.out.println("Enter the First Name of person whose details are to be changed :");
 			Scanner sc = new Scanner(System.in);
