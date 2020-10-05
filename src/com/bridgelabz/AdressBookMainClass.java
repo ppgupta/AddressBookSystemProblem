@@ -28,11 +28,31 @@ public class AdressBookMainClass {
 			((AddressBookPerson) m.getValue()).search(firstName);
 		}
 	}
-	
+	private void findPersonByState() {
+		System.out.println("Enter the state to be searched :");
+		Scanner sc = new Scanner(System.in);
+		String state = sc.nextLine();
+		for(Map.Entry m:addressBookMap.entrySet()) {
+			System.out.println("Searching in "+m.getKey()+" address book :");
+			((AddressBookPerson) m.getValue()).findPersonByState(state);
+		}		
+	}
+
+	private void findPersonByCity() {
+		System.out.println("Enter the city to be searched :");
+		Scanner sc = new Scanner(System.in);
+		String city = sc.nextLine();
+		for(Map.Entry m:addressBookMap.entrySet()) {
+			System.out.println("Searching in "+m.getKey()+" address book :");
+			((AddressBookPerson) m.getValue()).findPersonByCity(city);
+		}
+	}
 	public static void main(String[] args) {
 		AdressBookMainClass obj =new AdressBookMainClass();
 		obj.AddressBookList();
 		obj.search();
+		obj.findPersonByCity();
+		obj.findPersonByState();
 	}
 	
 }

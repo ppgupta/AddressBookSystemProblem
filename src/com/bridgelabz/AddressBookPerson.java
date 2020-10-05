@@ -4,8 +4,12 @@ public class AddressBookPerson {
 	private String bookName;
 	//arraylist to store contacts
 	private ArrayList<ContactDetails> bookList;
+	private Map<String,String> CityPerson;
+	private Map<String,String> StatePerson;
 
 	public AddressBookPerson(String bookName) {
+		this.CityPerson = new  HashMap<>();
+		this.StatePerson = new HashMap<>();
 		this.bookList = new ArrayList<>();
 		this.bookName = bookName;
 		Scanner sc = new Scanner(System.in);
@@ -13,7 +17,7 @@ public class AddressBookPerson {
 		int no = sc.nextInt();
 		sc.nextLine();
 		while(no>0) {
-			no--;
+			
 			System.out.println("Enter First Name :");
 			String firstName = sc.nextLine();
 			System.out.println("Enter Last Name :");
@@ -30,7 +34,9 @@ public class AddressBookPerson {
 			int zip = sc.nextInt();
 			System.out.println("Enter your Email Address :");
 			String emailId = sc.nextLine();
-			this.addNewContact(firstName, lastName,address, city, state, phoneNumber,zip, emailId);
+			boolean check=this.addNewContact(firstName, lastName,address, city, state, phoneNumber,zip, emailId);
+		if (check)no--;
+		else;
 		}
 }
 	// function to add new contacts to the addressbook
@@ -46,6 +52,8 @@ public class AddressBookPerson {
 			}
 			this.bookList.add(contactX);
 			System.out.println("Contact added successfully:");
+			this.CityPerson.put(contactX.getCity(), contactX.getFirstName());
+			this.StatePerson.put(contactX.getState(), contactX.getFirstName());
 			return true;
 		}
 		//change details of given person
@@ -103,6 +111,31 @@ public class AddressBookPerson {
 			}
 			
 		}
+		public void findPersonByCity(String city) {
+			boolean found =  false;
+			for(Map.Entry m:CityPerson.entrySet()) {
+				if(((String) m.getKey()).equalsIgnoreCase(city)) {
+					System.out.println(m.getValue()+" also lives in city :"+city);
+					found = true;
+				}
+			}
+			if(!found) {
+				System.out.println("No person found living  in city : "+city+" in "+this.bookName+" address book");
+			}
+		}
+		public void findPersonByState(String state) {
+			boolean found =  false;
+			for(Map.Entry m:StatePerson.entrySet()) {
+				if(((String) m.getKey()).equalsIgnoreCase(state)) {
+					System.out.println(m.getValue()+" also lives in state :"+state);
+					found = true;
+				}
+			}
+			if(!found) {
+				System.out.println("No person found living in state : "+state+" in "+this.bookName+" address book");
+			}
+		}
+		
 		// display welcome message
 		public void displayMessage() {
 			System.out.println("Welcome to Address Book");
