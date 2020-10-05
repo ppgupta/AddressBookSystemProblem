@@ -98,7 +98,7 @@ public class AddressBookPerson {
 		}
 		// search person by name
 
-		public void search(String firstName) {
+		public boolean search(String firstName) {
 			boolean found =  false;
 			for(int i = 0; i<this.bookList.size();i++) {
 				if(this.bookList.get(i).getFirstName().equalsIgnoreCase(firstName)) {
@@ -109,7 +109,7 @@ public class AddressBookPerson {
 			if(!found) {
 				System.out.println("No record found for "+firstName+" in "+this.bookName+" address book");
 			}
-			
+			return found;
 		}
 		public void findPersonByCity(String city) {
 			boolean found =  false;
@@ -135,6 +135,36 @@ public class AddressBookPerson {
 				System.out.println("No person found living in state : "+state+" in "+this.bookName+" address book");
 			}
 		}
+		//number_of_contact_person
+		public void getNumberofContactPerson(String personName) {
+			// first checking whether a person lives exist in the address book or not
+			boolean check = this.search(personName);
+			int count1 = 0, count2 = 0;
+			if(check) {
+				String personInSameCity = null;
+				String personInSameState = null;
+				for(Map.Entry m:StatePerson.entrySet()) {
+					if(((String) m.getValue()).equalsIgnoreCase(personName)) {
+						personInSameState = (String) m.getKey();
+					}
+				}
+				for(Map.Entry m:CityPerson.entrySet()) {
+					if(((String) m.getValue()).equalsIgnoreCase(personName)) {
+						personInSameCity = (String) m.getKey();
+					}
+				}
+				for(Map.Entry m:StatePerson.entrySet()) {
+					if(((String) m.getKey()).equalsIgnoreCase(personInSameCity)) {
+						count1++;
+					}
+					if(((String) m.getKey()).equalsIgnoreCase(personInSameState)) {
+						count2++;
+					}
+				}
+				System.out.println("Total number of people found in same state as "+personName+" is "+count2);
+				System.out.println("Total number of people found in same city as "+personName+" is "+count1);
+			}
+					}
 		
 		// display welcome message
 		public void displayMessage() {

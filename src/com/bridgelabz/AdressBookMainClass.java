@@ -47,12 +47,22 @@ public class AdressBookMainClass {
 			((AddressBookPerson) m.getValue()).findPersonByCity(city);
 		}
 	}
+	private void NumberOfContactPerson() {
+		System.out.println("Enter the first name of person who is looking for person with same city and state");
+		Scanner sc = new Scanner(System.in);
+		String personName = sc.nextLine();
+		for(Map.Entry m:addressBookMap.entrySet()) {
+			System.out.println("Searching in "+m.getKey()+" address book :");
+			((AddressBookPerson) m.getValue()).getNumberofContactPerson(personName);
+		}
+	}
 	public static void main(String[] args) {
 		AdressBookMainClass obj =new AdressBookMainClass();
 		obj.AddressBookList();
 		obj.search();
 		obj.findPersonByCity();
 		obj.findPersonByState();
+		obj.NumberOfContactPerson();
 	}
 	
 }
